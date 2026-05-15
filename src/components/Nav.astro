@@ -1,0 +1,37 @@
+---
+import Logo from './Logo.astro';
+import Button from './Button.astro';
+---
+
+<header
+  class="sticky top-0 z-50 backdrop-blur-md bg-cream/85 border-b border-coffee/8"
+>
+  <nav class="mx-auto max-w-6xl px-6 sm:px-10 h-16 flex items-center justify-between">
+    <Logo />
+
+    <div class="hidden md:flex items-center gap-8 text-sm">
+      <a
+        href="#meny"
+        class="text-coffee/80 hover:text-terracotta transition-colors"
+      >
+        Meny
+      </a>
+      <a
+        href="#story"
+        class="text-coffee/80 hover:text-terracotta transition-colors"
+      >
+        Vår story
+      </a>
+      <a
+        href="#hitta-hit"
+        class="text-coffee/80 hover:text-terracotta transition-colors"
+      >
+        Hitta hit
+      </a>
+    </div>
+
+    <Button href="#reservera" variant="primary" size="sm">
+      Reservera bord
+    </Button>
+  </nav>
+</header>

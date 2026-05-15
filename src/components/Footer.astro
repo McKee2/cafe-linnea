@@ -1,0 +1,145 @@
+---
+import Container from './Container.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-espresso text-cream/90">
+  <!-- Vortix CTA banner -->
+  <div class="bg-coffee py-6 border-b border-cream/10">
+    <Container size="wide">
+      <div
+        class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+      >
+        <p
+          class="font-serif italic text-base md:text-lg text-cream/90 leading-snug"
+        >
+          Vill ditt företag ha en sajt som den här?
+        </p>
+        <a
+          href="https://vortix.se"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-5 py-2.5 bg-terracotta text-cream rounded-sm hover:bg-terracotta-deep transition-colors text-sm font-medium flex-shrink-0"
+        >
+          Se Vortix
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M5 12h14m0 0l-6-6m6 6l-6 6"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </a>
+      </div>
+    </Container>
+  </div>
+
+  <!-- Main footer -->
+  <div class="pt-16 pb-10">
+    <Container size="wide">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 mb-14">
+        <!-- Logo + tagline -->
+        <div class="md:col-span-5">
+          <a
+            href="/"
+            class="inline-flex items-baseline gap-0.5 font-serif italic text-3xl text-cream hover:text-terracotta transition-colors mb-3"
+            aria-label="Café Linnea — startsidan"
+          >
+            <span class="font-normal tracking-tight">linnea</span>
+            <span class="text-terracotta">.</span>
+          </a>
+          <p
+            class="font-serif italic text-lg text-cream/70 leading-tight max-w-xs"
+          >
+            Långsamt kaffe på Söder.
+          </p>
+        </div>
+
+        <!-- Öppettider -->
+        <div class="md:col-span-3">
+          <p
+            class="font-mono text-[10px] uppercase tracking-[0.18em] text-cream/45 mb-4"
+          >
+            Öppettider
+          </p>
+          <div class="text-sm text-cream/80 space-y-1.5">
+            <p class="flex items-baseline justify-between gap-3">
+              <span class="text-cream/50">Mån–Fre</span>
+              <span class="font-mono tabular-nums">07:30–18:00</span>
+            </p>
+            <p class="flex items-baseline justify-between gap-3">
+              <span class="text-cream/50">Lör–Sön</span>
+              <span class="font-mono tabular-nums">09:00–17:00</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Kontakt -->
+        <div class="md:col-span-4">
+          <p
+            class="font-mono text-[10px] uppercase tracking-[0.18em] text-cream/45 mb-4"
+          >
+            Kontakt
+          </p>
+          <ul class="text-sm text-cream/80 space-y-2 not-italic">
+            <li>Bondegatan 27, 116 33 Stockholm</li>
+            <li>
+              <a
+                href="tel:+46812345678"
+                class="hover:text-terracotta transition-colors"
+              >
+                08-123 45 67
+              </a>
+            </li>
+            <li>
+              <a
+                href="mailto:hej@cafelinnea.se"
+                class="hover:text-terracotta transition-colors"
+              >
+                hej@cafelinnea.se
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://instagram.com/cafelinnea"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover:text-terracotta transition-colors"
+              >
+                @cafelinnea
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom row -->
+      <div
+        class="pt-8 border-t border-cream/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-3 text-xs font-mono"
+      >
+        <p class="text-cream/40">
+          © {year} Café Linnea
+        </p>
+        <p class="text-cream/50">
+          <span class="text-cream/30">Demo · fiktivt café byggt av</span>
+          <a
+            href="https://vortix.se"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-terracotta hover:text-cream transition-colors ml-1"
+          >
+            Vortix →
+          </a>
+        </p>
+      </div>
+    </Container>
+  </div>
+</footer>

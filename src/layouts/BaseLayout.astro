@@ -1,0 +1,102 @@
+---
+import { Font } from 'astro:assets';
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = 'Café Linnea — Långsamt kaffe på Söder',
+  description = 'Surdegslimpa, hemrostat espresso och italienska kakor på Bondegatan 27. Söder, Stockholm. Öppet alla dagar.',
+  image = '/og-image.png',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImageUrl = new URL(image, Astro.site).href;
+---
+
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Demo: do NOT index (fictional cafe, shouldn't compete in SEO) -->
+    <meta name="robots" content="noindex, nofollow" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="restaurant" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content="sv_SE" />
+    <meta property="og:site_name" content="Café Linnea" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#FBF6EE" />
+
+    <!-- JSON-LD Restaurant schema (still useful for demo polish) -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'CafeOrCoffeeShop',
+        name: 'Café Linnea',
+        description,
+        image: ogImageUrl,
+        url: 'https://cafelinnea.vortix.se',
+        telephone: '+46-8-123-45-67',
+        priceRange: '$$',
+        servesCuisine: ['Italian', 'Café', 'Brunch'],
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: 'Bondegatan 27',
+          addressLocality: 'Stockholm',
+          postalCode: '116 33',
+          addressCountry: 'SE',
+        },
+        openingHoursSpecification: [
+          {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+            opens: '07:30',
+            closes: '18:00',
+          },
+          {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: ['Saturday', 'Sunday'],
+            opens: '09:00',
+            closes: '17:00',
+          },
+        ],
+      })}
+    />
+
+    <!-- Astro 6 Fonts API -->
+    <Font cssVariable="--font-fraunces" preload />
+    <Font cssVariable="--font-geist" />
+
+    <ClientRouter />
+  </head>
+  <body class="bg-cream text-coffee antialiased">
+    <slot />
+  </body>
+</html>

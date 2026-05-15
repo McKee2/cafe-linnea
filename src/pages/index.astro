@@ -1,17 +1,24 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/sections/Hero.astro';
+import Idag from '../components/sections/Idag.astro';
+import Meny from '../components/sections/Meny.astro';
+import Story from '../components/sections/Story.astro';
+import Reservera from '../components/sections/Reservera.astro';
+import HittaHit from '../components/sections/HittaHit.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout>
+  <Nav />
+  <main>
+    <Hero />
+    <Idag />
+    <Meny />
+    <Story />
+    <Reservera />
+    <HittaHit />
+  </main>
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+/* ============================================
+   CAFÉ LINNEA DESIGN TOKENS
+   Warm, organic, italian-leaning palette
+   ============================================ */
+
+@theme {
+  /* === Brand colors === */
+  --color-cream: #fbf6ee;
+  --color-sand: #f5e8d5;
+  --color-terracotta: #d97757;
+  --color-terracotta-deep: #b85d40;
+  --color-sage: #7c8471;
+  --color-sage-deep: #5e6555;
+  --color-coffee: #3d2c1e;
+  --color-coffee-soft: #6b5544;
+  --color-espresso: #1a0f08;
+
+  /* === Typography ===
+     Fraunces = expressive variable serif (Italian-modern feel)
+     Geist = neutral sans for body */
+  --font-serif: var(--font-fraunces, "Cormorant", ui-serif, Georgia, serif);
+  --font-sans: var(--font-geist, ui-sans-serif, system-ui, sans-serif);
+  --font-mono: var(--font-geist-mono, ui-monospace, "SF Mono", monospace);
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-coffee);
+  font-family: var(--font-sans);
+  /* Optical sizing for Fraunces */
+  font-optical-sizing: auto;
+}
+
+/* Default font-family for serif elements */
+.font-serif {
+  font-variation-settings: "SOFT" 50, "WONK" 0;
+}
+
+/* Anchor offset for sticky header */
+section[id] {
+  scroll-margin-top: 80px;
+}
+
+/* Selection */
+::selection {
+  background: var(--color-terracotta);
+  color: var(--color-cream);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

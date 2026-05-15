@@ -1,0 +1,16 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<a
+  href="/"
+  class={`inline-flex items-baseline gap-0.5 font-serif italic text-2xl text-coffee hover:text-terracotta transition-colors ${className}`}
+  aria-label="Café Linnea — startsidan"
+>
+  <span class="font-normal tracking-tight">linnea</span>
+  <span class="text-terracotta">.</span>
+</a>

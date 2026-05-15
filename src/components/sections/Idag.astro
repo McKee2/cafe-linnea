@@ -1,0 +1,214 @@
+---
+import Container from '../Container.astro';
+
+const today = new Date();
+const weekdayLong = today.toLocaleDateString('sv-SE', { weekday: 'long' });
+const dayShort = today.toLocaleDateString('sv-SE', {
+  day: 'numeric',
+  month: 'long',
+});
+const todayDayIndex = today.getDay(); // 0 = Söndag
+
+interface Special {
+  category: string;
+  name: string;
+  description: string;
+  price: number;
+}
+
+const specials: Special[] = [
+  {
+    category: 'Lunch',
+    name: 'Sparrissoppa med citron',
+    description:
+      'Vit sparris från Skåne, gräddig bouillon, lite citronzest. Serveras med rostat surdegsbröd.',
+    price: 125,
+  },
+  {
+    category: 'Bakverk',
+    name: 'Rabarber-galette',
+    description:
+      'Bakad i morse. Säsongens rabarber, vaniljgrädde från Hallstena Mejeri.',
+    price: 75,
+  },
+  {
+    category: 'Dryck',
+    name: 'Iced latte med honung',
+    description:
+      'Vårens nyhet. Vår espresso, kall mjölk, honung från Solfridas Bigård.',
+    price: 65,
+  },
+];
+
+interface OpeningDay {
+  name: string;
+  hours: string;
+  dayIndex: number;
+}
+
+const openingHours: OpeningDay[] = [
+  { name: 'Måndag', hours: '07:30 – 18:00', dayIndex: 1 },
+  { name: 'Tisdag', hours: '07:30 – 18:00', dayIndex: 2 },
+  { name: 'Onsdag', hours: '07:30 – 18:00', dayIndex: 3 },
+  { name: 'Torsdag', hours: '07:30 – 18:00', dayIndex: 4 },
+  { name: 'Fredag', hours: '07:30 – 18:00', dayIndex: 5 },
+  { name: 'Lördag', hours: '09:00 – 17:00', dayIndex: 6 },
+  { name: 'Söndag', hours: '09:00 – 17:00', dayIndex: 0 },
+];
+---
+
+<section id="idag" class="bg-sand/60 py-20 md:py-28 border-t border-coffee/8">
+  <Container size="wide">
+    <!-- Section header -->
+    <div class="mb-12 md:mb-16">
+      <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-4">
+        <p
+          class="font-mono text-xs uppercase tracking-[0.2em] text-coffee/60"
+        >
+          Idag
+        </p>
+        <span
+          class="font-mono text-xs tracking-[0.15em] text-coffee/40 capitalize"
+        >
+          {weekdayLong} {dayShort}
+        </span>
+      </div>
+      <h2
+        class="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-coffee tracking-[-0.02em] leading-[1.05]"
+      >
+        Vad vi <span class="italic font-normal text-terracotta">serverar</span>
+        idag.
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+      <!-- Dagens specialiteter -->
+      <div class="lg:col-span-7">
+        <p
+          class="font-mono text-xs uppercase tracking-[0.18em] text-coffee/60 mb-6"
+        >
+          Dagens utvalda
+        </p>
+        <ul class="space-y-4">
+          {
+            specials.map((special) => (
+              <li class="group flex items-start justify-between gap-6 bg-cream border border-coffee/10 rounded-sm p-5 md:p-6 transition-colors hover:border-terracotta/40">
+                <div class="flex-1 min-w-0">
+                  <p class="font-mono text-[10px] uppercase tracking-[0.15em] text-sage mb-2">
+                    {special.category}
+                  </p>
+                  <h3 class="font-serif text-xl md:text-2xl text-coffee mb-2 leading-tight">
+                    {special.name}
+                  </h3>
+                  <p class="text-sm md:text-base text-coffee/70 leading-relaxed">
+                    {special.description}
+                  </p>
+                </div>
+                <div class="flex-shrink-0 flex items-baseline">
+                  <span class="font-serif text-2xl md:text-3xl text-terracotta tabular-nums">
+                    {special.price}
+                  </span>
+                  <span class="font-mono text-xs text-coffee/40 ml-1">
+                    kr
+                  </span>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Right rail -->
+      <div class="lg:col-span-5 space-y-10">
+        <!-- Öppettider -->
+        <div>
+          <p
+            class="font-mono text-xs uppercase tracking-[0.18em] text-coffee/60 mb-6"
+          >
+            Öppettider
+          </p>
+          <ul class="bg-cream/50 border border-coffee/10 rounded-sm">
+            {
+              openingHours.map((day, i) => {
+                const isToday = day.dayIndex === todayDayIndex;
+                const isLast = i === openingHours.length - 1;
+                return (
+                  <li
+                    class:list={[
+                      'flex items-baseline justify-between gap-4 px-5 py-3',
+                      !isLast && 'border-b border-coffee/8',
+                      isToday && 'bg-terracotta/5',
+                    ]}
+                  >
+                    <span
+                      class:list={[
+                        'text-sm md:text-base',
+                        isToday
+                          ? 'text-terracotta font-medium'
+                          : 'text-coffee/80',
+                      ]}
+                    >
+                      {day.name}
+                      {isToday && (
+                        <span class="ml-2 font-mono text-[10px] uppercase tracking-wider text-terracotta/70">
+                          · Idag
+                        </span>
+                      )}
+                    </span>
+                    <span
+                      class:list={[
+                        'font-mono text-sm tabular-nums',
+                        isToday ? 'text-terracotta' : 'text-coffee/60',
+                      ]}
+                    >
+                      {day.hours}
+                    </span>
+                  </li>
+                );
+              })
+            }
+          </ul>
+        </div>
+
+        <!-- Lugnaste tiderna -->
+        <div>
+          <p
+            class="font-mono text-xs uppercase tracking-[0.18em] text-coffee/60 mb-4"
+          >
+            Lugnaste tiderna
+          </p>
+          <div class="bg-cream/50 border border-coffee/10 rounded-sm p-5">
+            <div class="flex items-baseline gap-3 mb-2.5">
+              <span
+                class="font-serif text-2xl text-sage tabular-nums leading-none"
+              >
+                08–10
+              </span>
+              <span
+                class="font-mono text-xs text-coffee/50 uppercase tracking-wider"
+              >
+                Efter morgonrushen
+              </span>
+            </div>
+            <div class="flex items-baseline gap-3 mb-4">
+              <span
+                class="font-serif text-2xl text-sage tabular-nums leading-none"
+              >
+                14–16
+              </span>
+              <span
+                class="font-mono text-xs text-coffee/50 uppercase tracking-wider"
+              >
+                Eftermiddagspaus
+              </span>
+            </div>
+            <p class="text-sm text-coffee/70 leading-relaxed">
+              Kom med laptopen — vi har snabbt WiFi och eluttag vid stora
+              fönsterbordet.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>

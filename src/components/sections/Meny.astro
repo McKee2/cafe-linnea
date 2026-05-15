@@ -1,0 +1,276 @@
+---
+import Container from '../Container.astro';
+
+type TagKey = 'V' | 'VE' | 'GF' | 'H' | 'S';
+
+const tagMeta: Record<TagKey, { label: string; class: string }> = {
+  V: { label: 'V', class: 'text-sage' },
+  VE: { label: 'VE', class: 'text-sage' },
+  GF: { label: 'GF', class: 'text-sage' },
+  H: { label: 'Hemma', class: 'text-terracotta' },
+  S: { label: 'Säsong', class: 'text-terracotta' },
+};
+
+interface MenuItem {
+  name: string;
+  description?: string;
+  price: number;
+  tags?: TagKey[];
+}
+
+interface MenuCategory {
+  name: string;
+  timeWindow?: string;
+  items: MenuItem[];
+}
+
+const menu: MenuCategory[] = [
+  {
+    name: 'Kaffe & Te',
+    items: [
+      {
+        name: 'Espresso',
+        description: 'Vår signatur, mörkrostad från Bologna.',
+        price: 35,
+      },
+      { name: 'Cappuccino', price: 55 },
+      { name: 'Flat white', price: 55 },
+      { name: 'Caffè latte', price: 55 },
+      {
+        name: 'Pour over',
+        description: 'Roterande gäst-bönar från specialty-rosters.',
+        price: 65,
+      },
+      { name: 'Iste', price: 45 },
+      {
+        name: 'Te (urval)',
+        description: 'Earl grey, sencha, kamomill, rooibos.',
+        price: 45,
+      },
+      {
+        name: 'Chocolate caldo',
+        description: 'Italiensk varm choklad — tjock och rik.',
+        price: 65,
+      },
+    ],
+  },
+  {
+    name: 'Frukost',
+    timeWindow: '08:00 – 11:00',
+    items: [
+      { name: 'Surdeg med smör, ost, sylt', price: 85, tags: ['V'] },
+      {
+        name: 'Avokado på surdeg, citron, chili',
+        price: 125,
+        tags: ['V'],
+      },
+      {
+        name: 'Grekisk yoghurt, honung, granola, säsongsfrukt',
+        description: 'Granola bakas hos oss.',
+        price: 95,
+        tags: ['V', 'H'],
+      },
+      {
+        name: 'Bolognese-äggröra, surdegsskorpa',
+        description: 'Med pancetta och färska örter.',
+        price: 145,
+      },
+      {
+        name: 'Cornetto med marmelad',
+        description: 'Italiensk croissant — smörig och flagig.',
+        price: 55,
+        tags: ['V'],
+      },
+    ],
+  },
+  {
+    name: 'Lunch',
+    timeWindow: '11:00 – 15:00',
+    items: [
+      {
+        name: 'Dagens sallad',
+        description: 'Säsongsbaserad — fråga i baren.',
+        price: 145,
+        tags: ['S'],
+      },
+      {
+        name: 'Sandwich med skinka, mozzarella, basilika',
+        price: 125,
+      },
+      {
+        name: 'Soppa med bröd',
+        description: 'Säsong — fråga i baren.',
+        price: 125,
+        tags: ['S'],
+      },
+      {
+        name: 'Pasta carbonara',
+        description: 'Klassisk: guanciale, pecorino, äggula.',
+        price: 165,
+      },
+      {
+        name: 'Pasta med säsongsgrönsaker',
+        price: 155,
+        tags: ['V', 'S'],
+      },
+    ],
+  },
+  {
+    name: 'Söta saker',
+    items: [
+      {
+        name: 'Kanelbulle',
+        description: 'Egen receptur — smörig och kardemumma-rik.',
+        price: 45,
+        tags: ['H'],
+      },
+      {
+        name: 'Saffranskaka',
+        description: 'Tillbaka med första frosten.',
+        price: 55,
+        tags: ['S', 'H'],
+      },
+      {
+        name: 'Tiramisu',
+        description: 'Klassisk, gjord på beställning.',
+        price: 65,
+        tags: ['H'],
+      },
+      {
+        name: 'Cantucci (4st)',
+        description: 'Mandelkex — perfekt till espresso.',
+        price: 35,
+      },
+      {
+        name: 'Surdegspizza',
+        description: 'Efter kl. 12. Säsongstopping.',
+        price: 95,
+        tags: ['S'],
+      },
+    ],
+  },
+];
+---
+
+<section id="meny" class="bg-cream py-20 md:py-28 border-t border-coffee/8">
+  <Container size="wide">
+    <!-- Section header -->
+    <div class="max-w-2xl mb-12 md:mb-16">
+      <p
+        class="font-mono text-xs uppercase tracking-[0.2em] text-coffee/60 mb-4"
+      >
+        Meny
+      </p>
+      <h2
+        class="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-coffee tracking-[-0.02em] leading-[1.05] mb-6"
+      >
+        Hela <span class="italic font-normal text-terracotta">menyn.</span>
+      </h2>
+      <p class="text-base md:text-lg text-coffee/70 leading-relaxed">
+        Frukost 08–11. Lunch 11–15. Kaffe, te och söta saker hela dagen.
+      </p>
+    </div>
+
+    <!-- Tag legend -->
+    <div
+      class="flex flex-wrap gap-x-5 gap-y-2 mb-14 pb-6 border-b border-coffee/10 text-xs font-mono text-coffee/55"
+    >
+      <span class="inline-flex items-center gap-1.5">
+        <span class="font-medium text-sage uppercase tracking-wider">V</span>
+        Vegetariskt
+      </span>
+      <span class="inline-flex items-center gap-1.5">
+        <span class="font-medium text-sage uppercase tracking-wider">VE</span>
+        Vegan
+      </span>
+      <span class="inline-flex items-center gap-1.5">
+        <span class="font-medium text-sage uppercase tracking-wider">GF</span>
+        Glutenfritt
+      </span>
+      <span class="inline-flex items-center gap-1.5">
+        <span class="font-medium text-terracotta uppercase tracking-wider"
+          >Hemma</span
+        >
+        Hemmagjort
+      </span>
+      <span class="inline-flex items-center gap-1.5">
+        <span class="font-medium text-terracotta uppercase tracking-wider"
+          >Säsong</span
+        >
+        Säsongsbegränsat
+      </span>
+    </div>
+
+    <!-- Menu categories -->
+    <div class="space-y-16 md:space-y-20">
+      {
+        menu.map((category) => (
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10">
+            {/* Category header */}
+            <div class="lg:col-span-3 lg:sticky lg:top-24 lg:self-start">
+              <h3 class="font-serif text-3xl md:text-4xl text-coffee mb-2 leading-tight">
+                {category.name}
+              </h3>
+              {category.timeWindow && (
+                <p class="font-mono text-xs uppercase tracking-[0.15em] text-coffee/45">
+                  {category.timeWindow}
+                </p>
+              )}
+            </div>
+
+            {/* Items */}
+            <ul class="lg:col-span-9 space-y-5">
+              {category.items.map((item, i) => (
+                <li
+                  class:list={[
+                    'flex items-baseline justify-between gap-6 pb-5',
+                    i < category.items.length - 1 && 'border-b border-coffee/8',
+                  ]}
+                >
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-baseline gap-2 flex-wrap mb-1">
+                      <h4 class="font-serif text-lg md:text-xl text-coffee leading-snug">
+                        {item.name}
+                      </h4>
+                      {item.tags?.map((tag) => (
+                        <span
+                          class:list={[
+                            'font-mono text-[10px] uppercase tracking-wider whitespace-nowrap',
+                            tagMeta[tag].class,
+                          ]}
+                        >
+                          {tagMeta[tag].label}
+                        </span>
+                      ))}
+                    </div>
+                    {item.description && (
+                      <p class="text-sm text-coffee/65 leading-relaxed">
+                        {item.description}
+                      </p>
+                    )}
+                  </div>
+                  <div class="flex-shrink-0 flex items-baseline">
+                    <span class="font-serif text-xl md:text-2xl text-terracotta tabular-nums leading-none">
+                      {item.price}
+                    </span>
+                    <span class="font-mono text-xs text-coffee/40 ml-1">
+                      kr
+                    </span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Footer note -->
+    <p
+      class="mt-16 md:mt-20 text-sm text-coffee/60 italic leading-relaxed max-w-2xl"
+    >
+      Allergier eller önskemål? Säg till i baren — vi anpassar gärna. Menyn byts
+      med säsongen, vissa rätter är därför inte alltid på listan.
+    </p>
+  </Container>
+</section>

@@ -1,0 +1,146 @@
+---
+import Container from '../Container.astro';
+
+interface Value {
+  title: string;
+  description: string;
+}
+
+const values: Value[] = [
+  {
+    title: 'Lokalt först',
+    description:
+      'Mjölk från Hallstena Mejeri, honung från Solfridas Bigård, surdeg på svensk gammaldags vete.',
+  },
+  {
+    title: 'Säsongsbaserat',
+    description:
+      'Menyn ändras när naturen ändras. Rabarber i maj, kantareller i augusti, saffran från första frosten.',
+  },
+  {
+    title: 'Tid att stanna',
+    description:
+      'Vi har inga to-go-koppar i papp. Bara porslin. Och inget WiFi-lösen på menyn.',
+  },
+];
+---
+
+<section id="story" class="bg-sand/60 py-20 md:py-28 border-t border-coffee/8">
+  <Container size="wide">
+    <!-- Eyebrow -->
+    <p
+      class="font-mono text-xs uppercase tracking-[0.2em] text-coffee/60 mb-8 md:mb-12"
+    >
+      Vår story
+    </p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+      <!-- Image column -->
+      <div class="lg:col-span-5">
+        <div
+          class="relative aspect-[4/5] overflow-hidden bg-coffee/5"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1611564494260-6f0e8e518e62?w=1200&q=80&auto=format&fit=crop"
+            alt="Linnea Bergström, grundare av Café Linnea"
+            class="absolute inset-0 w-full h-full object-cover"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <p
+          class="mt-4 font-mono text-xs uppercase tracking-[0.15em] text-coffee/50"
+        >
+          Linnea Bergström, grundare · Bondegatan 27
+        </p>
+      </div>
+
+      <!-- Text column -->
+      <div class="lg:col-span-7">
+        <!-- Headline -->
+        <h2
+          class="font-serif text-4xl md:text-5xl lg:text-6xl font-light text-coffee tracking-[-0.02em] leading-[1.05] mb-10"
+        >
+          Vi öppnade efter en <span
+            class="italic font-normal text-terracotta">sommar</span
+          > i Bologna.
+        </h2>
+
+        <!-- Body paragraphs -->
+        <div
+          class="space-y-6 text-base md:text-lg text-coffee/80 leading-[1.7] max-w-prose"
+        >
+          <p>
+            Det började med en espresso på Piazza Maggiore. Linnea hade rest
+            till Bologna sommaren 2018 för att läsa italienska. Men det var inte
+            språket som fastnade — det var caférutinen. Lokalerna där folk
+            stannade i två timmar över en cappuccino, samtal som kröp över
+            bordkanten, värdar som kände sina gäster vid namn.
+          </p>
+          <p>
+            Hemkommen till Stockholm började idén forma sig. Inte en italiensk
+            kopia, utan ett café som tog det
+            <em class="font-serif italic text-coffee not-italic">
+              italienska tempot
+            </em> på allvar i en svensk kontext. Surdegen från svensk gammaldags
+            vetekultur. Espresso-bönan från en mikrostekare i Bologna som skickar
+            två kilo per vecka. Kanelbullen — den klassiska — med kardemumman som
+            farmor i Småland alltid använde.
+          </p>
+          <p>
+            Café Linnea öppnade på Bondegatan 27 i mars 2019. Tolv platser, två
+            baristor,
+            <em class="font-serif italic text-coffee not-italic">
+              ingen wifi-kod på menyn
+            </em>. Det sista var en del av idén — om man satte sig ner skulle man
+            kanske till och med titta upp.
+          </p>
+          <p>
+            Sju år senare är vi fortfarande små. Fortfarande
+            <em class="font-serif italic text-coffee not-italic">
+              långsamma
+            </em>. Och fortfarande, varje morgon, börjar dagen med en espresso
+            bakom disken klockan halv åtta.
+          </p>
+        </div>
+
+        <!-- Signature -->
+        <p
+          class="mt-12 font-serif italic font-light text-4xl md:text-5xl text-terracotta"
+        >
+          — Linnea
+        </p>
+
+        <!-- Values -->
+        <div class="mt-14 pt-10 border-t border-coffee/15">
+          <p
+            class="font-mono text-xs uppercase tracking-[0.18em] text-coffee/60 mb-8"
+          >
+            Vad vi tror på
+          </p>
+          <dl class="space-y-6">
+            {
+              values.map((value) => (
+                <div class="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-y-1 sm:gap-x-8">
+                  <dt class="font-serif text-lg md:text-xl text-coffee">
+                    {value.title}
+                  </dt>
+                  <dd class="text-sm md:text-base text-coffee/70 leading-relaxed">
+                    {value.description}
+                  </dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>
+
+<style>
+  /* Override Tailwind <em> default italic behavior so our font-serif italic kicks in cleanly */
+  em.not-italic {
+    font-style: italic;
+  }
+</style>
